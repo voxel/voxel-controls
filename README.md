@@ -12,9 +12,8 @@ when paused.
 { speed: Number(0.0032)           // starting speed
 , walkMaxSpeed: Number(0.0056)        // max walking speed
 , runkMaxSpeed: Number(0.0112)        // max running speed
-, jumpMaxSpeed: Number(0.016)     // max jump speed
-, jumpMaxTimer: Number(200)     // maximum amount of time jump will be applied in MS
-, jumpSpeed: Number(0.004)        // starting jump speed
+, jumpAccel: Number(0.000085)       // jumping acceleration 
+, jumpTimer: Number(200)     // maximum amount of time jump will be applied in MS
 , jumpSpeedMove: Number(0.1)        // velocity modifier to use when moving laterally while in the middle of a jump
 , accelTimer: Number(200)       // time to reach full speed on X/Y
 , accelerationCurve: Function() // function(current, max) -> [0-1]
@@ -44,7 +43,7 @@ when paused.
 
 #### Control#target(target?) -> target
 
-`target` is the object to be manipulated. Assumed to have `.acceleration`, `.velocity`, and `.atRestY() -> -1, 0, 1`.
+`target` is the object to be manipulated. Assumed to have `.position`, `.velocity`, and `.atRestY() -> -1, 0, 1`.
 
 if a target is passed, set control to target that argument.
 

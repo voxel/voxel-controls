@@ -19,9 +19,8 @@ function Control(state, opts) {
   this.speed = opts.speed || 0.0032
   this.walk_max_speed = opts.walkMaxSpeed || 0.0056
   this.run_max_speed = opts.runMaxSpeed || 0.0112
-  this.jump_max_speed = opts.jumpMaxSpeed || 0.016
+  this.jump_accel = opts.jumpAccel || 0.000085
   this.jump_max_timer = opts.jumpTimer || 200
-  this.jump_speed = opts.jumpSpeed || 0.004
   this.jump_speed_move = opts.jumpSpeedMove || 0.1
   this.jump_timer = 0
   this.jumping = false
@@ -78,7 +77,6 @@ proto.tick = function(dt) {
   var state = this.state
     , target = this._target
     , speed = this.speed
-    , jump_speed = this.jump_speed
     , jump_speed_move = this.jump_speed_move
     , max_speed = this.state.sprint ? this.run_max_speed : this.walk_max_speed
     , okay_z = abs(target.velocity.z) < max_speed
@@ -127,7 +125,11 @@ proto.tick = function(dt) {
     } else {
       this.jumping = true
       if(this.jump_timer > 0) {
-        target.velocity.y = min(target.velocity.y + jump_speed * min(dt, this.jump_timer), this.jump_max_speed)
+        var old_velocity = target.velocity.y
+
+        target.velocity.y += this.jump_accel * min(dt, this.jump_timer)
+        target.position.y += (old_velocity + target.velocity.y) * 0.5 * min(dt, this.jump_timer)
+        //console.log(target.position.y+"\t"+target.velocity.y)
       }
       this.jump_timer = max(this.jump_timer - dt, 0)
     }
