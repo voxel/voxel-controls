@@ -44,7 +44,7 @@ when paused.
 
 #### Control#target(target?) -> target
 
-`target` is the object to be manipulated. Assumed to have `.acceleration`, `.velocity`, and `.atRestY() -> -1, 0, 1`.
+`target` is the object to be manipulated. Assumed to have `.acceleration`, `.velocity`, `.rotation`, and `.atRestY() -> -1, 0, 1`.
 
 if a target is passed, set control to target that argument.
 
