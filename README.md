@@ -1,9 +1,12 @@
-# voxel-control
+# voxel-controls
 
-manipulate [voxel-physical objects](https://github.com/chrisdickinson/voxel-physical) using
+Manipulate [voxel-physicals objects](https://github.com/deathcap/voxel-physicals) using
 a state object. implements basic FPS controls. is a `through` stream of sorts -- it relies
 on voxel-engine to call `control.tick(dt)` to start producing events. it will buffer events
 when paused.
+
+*based on [voxel-control](https://github.com/chrisdickinson/voxel-control) by chrisdickinson
+except integrates with voxel-physicals instead of voxel-physical*
 
 ### options
 
